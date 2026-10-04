@@ -1,0 +1,8 @@
+# Local Claude Code settings (development-only, not shipped)
+.claude/
+
+# Evaluation sandbox (dummy app used to verify the skill; throwaway)
+eval/
+
+node_modules/
+dist/
