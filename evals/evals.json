@@ -1,0 +1,23 @@
+{
+  "skill_name": "e2e-coverage-architect",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Our e2e tests are pretty thin and I'm not sure what's actually covered anymore. Figure out what user flows are untested in this app and add Playwright tests for the important stuff. The app is in ./project",
+      "expected_output": "Behavior coverage analysis artifacts (docs/e2e-coverage/), planted gaps identified and prioritized, new tests implemented and passing, planted bug recorded as known-failure with no app code changes.",
+      "files": ["project"]
+    },
+    {
+      "id": 1,
+      "prompt": "I inherited this codebase and honestly I don't trust the existing Playwright tests — a couple feel like they pass without testing anything real. Audit what's actually covered, call out any weak tests, and fill in the meaningful gaps with proper tests. App lives in ./project",
+      "expected_output": "Same as eval 0, with emphasis on detecting the planted false-green tests and reporting them explicitly.",
+      "files": ["project"]
+    },
+    {
+      "id": 2,
+      "prompt": "We have literally zero e2e tests on this thing. Set up Playwright and build solid coverage of the main user flows, including admin functionality and error cases. The app is in ./project",
+      "expected_output": "Playwright bootstrapped from scratch, full behavior analysis, tests for main flows including admin/authz/validation/error paths, planted bug found as known-failure, no app code changes.",
+      "files": ["project"]
+    }
+  ]
+}

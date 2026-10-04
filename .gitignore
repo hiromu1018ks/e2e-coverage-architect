@@ -6,3 +6,8 @@ eval/
 
 node_modules/
 dist/
+test-results/
+playwright-report/
+
+# skill-creator evaluation workspace (contains app copies + run outputs)
+e2e-coverage-architect-workspace/
