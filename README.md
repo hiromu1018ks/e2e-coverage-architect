@@ -15,7 +15,7 @@ Completion is judged by **behavior coverage** — never by test count or route c
 ## Install
 
 ```bash
-npx skills add <owner>/e2e-coverage-architect
+npx skills add hiromu1018ks/e2e-coverage-architect
 ```
 
 ## What it touches
@@ -33,3 +33,7 @@ npx skills add <owner>/e2e-coverage-architect
 ## Example
 
 > Our e2e tests are thin and I'm not sure what's actually covered. Figure out what user flows are untested and add Playwright tests for the important stuff.
+
+## License
+
+[MIT](LICENSE)

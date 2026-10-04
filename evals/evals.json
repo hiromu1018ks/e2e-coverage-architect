@@ -5,19 +5,52 @@
       "id": 0,
       "prompt": "Our e2e tests are pretty thin and I'm not sure what's actually covered anymore. Figure out what user flows are untested in this app and add Playwright tests for the important stuff. The app is in ./project",
       "expected_output": "Behavior coverage analysis artifacts (docs/e2e-coverage/), planted gaps identified and prioritized, new tests implemented and passing, planted bug recorded as known-failure with no app code changes.",
-      "files": ["project"]
+      "files": ["project"],
+      "assertions": [
+        "Coverage artifacts exist: docs/e2e-coverage/matrix.md, gaps.md, and findings.md are all present in the target project",
+        "App source code is unmodified: git diff against the baseline commit shows no changes to server.js, public/, or data/store.js",
+        "Planted bug handled correctly: the edit-drops-title bug is documented as a known-failure in findings.md, the corresponding test is marked fixme with a reference, and server.js was not changed to fix it",
+        "False greens detected: all three planted weak tests (delete test with no assertions, skipped admin test, seed-data test) are called out with reasons in findings.md or gaps.md",
+        "Authorization gaps covered: new tests verify a user cannot delete another user's post (403 / post remains) and a non-admin is blocked from the users page",
+        "Validation and error paths covered: new tests verify invalid login shows an error and empty-title post creation is rejected with a visible error",
+        "State and persistence covered: new tests verify logout/visitor redirect behavior and that a created post survives a page reload",
+        "Final suite is green: npx playwright test passes with no failures other than skipped/fixme entries",
+        "Honest completion claim: report.md states a complete/incomplete outcome consistent with the state of gaps.md and matrix.md"
+      ]
     },
     {
       "id": 1,
       "prompt": "I inherited this codebase and honestly I don't trust the existing Playwright tests — a couple feel like they pass without testing anything real. Audit what's actually covered, call out any weak tests, and fill in the meaningful gaps with proper tests. App lives in ./project",
       "expected_output": "Same as eval 0, with emphasis on detecting the planted false-green tests and reporting them explicitly.",
-      "files": ["project"]
+      "files": ["project"],
+      "assertions": [
+        "Coverage artifacts exist: docs/e2e-coverage/matrix.md, gaps.md, and findings.md are all present in the target project",
+        "App source code is unmodified: git diff against the baseline commit shows no changes to server.js, public/, or data/store.js",
+        "Planted bug handled correctly: the edit-drops-title bug is documented as a known-failure in findings.md, the corresponding test is marked fixme with a reference, and server.js was not changed to fix it",
+        "False greens detected: all three planted weak tests (delete test with no assertions, skipped admin test, seed-data test) are called out with reasons in findings.md or gaps.md",
+        "Authorization gaps covered: new tests verify a user cannot delete another user's post (403 / post remains) and a non-admin is blocked from the users page",
+        "Validation and error paths covered: new tests verify invalid login shows an error and empty-title post creation is rejected with a visible error",
+        "State and persistence covered: new tests verify logout/visitor redirect behavior and that a created post survives a page reload",
+        "Final suite is green: npx playwright test passes with no failures other than skipped/fixme entries",
+        "Honest completion claim: report.md states a complete/incomplete outcome consistent with the state of gaps.md and matrix.md"
+      ]
     },
     {
       "id": 2,
       "prompt": "We have literally zero e2e tests on this thing. Set up Playwright and build solid coverage of the main user flows, including admin functionality and error cases. The app is in ./project",
       "expected_output": "Playwright bootstrapped from scratch, full behavior analysis, tests for main flows including admin/authz/validation/error paths, planted bug found as known-failure, no app code changes.",
-      "files": ["project"]
+      "files": ["project"],
+      "assertions": [
+        "Playwright bootstrapped: playwright.config.*, tests/e2e/ directory, and @playwright/test devDependency exist in the project",
+        "App source code is unmodified: git diff against the baseline commit shows no changes to server.js, public/, or data/store.js",
+        "Planted bug handled correctly: the edit-drops-title bug is documented as a known-failure in findings.md, the corresponding test is marked fixme with a reference, and server.js was not changed to fix it",
+        "Admin functionality covered: tests verify an admin can view the user list AND a non-admin is blocked from it",
+        "Error cases covered: invalid login error and empty-title validation are tested",
+        "Core flows covered: login, post creation, and at least one persistence check (created post survives reload) are tested",
+        "Final suite is green: npx playwright test passes with no failures other than skipped/fixme entries",
+        "Coverage artifacts exist: docs/e2e-coverage/{matrix,gaps,findings}.md",
+        "Honest completion claim: report.md states a complete/incomplete outcome consistent with the state of gaps.md and matrix.md"
+      ]
     }
   ]
 }
