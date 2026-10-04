@@ -12,12 +12,12 @@ The evidence rule: a cell is covered only if you can name the cited assertion th
 
 ## False-green checklist
 
-Apply to every test that appears to cover a cell. Any hit → downgrade the cell to `partial`, and record the test in `findings.md` under "False greens" with the reason.
+Apply to every test that appears to cover a cell. Any hit → downgrade the cell to `partial`, and record the hit in `findings.md` under "False greens" with the reason. Record each hit as its own entry that names the test file and test title — an unnamed note is easy to skip and impossible to verify later.
 
 1. **No meaningful assertions** — only navigation/waits (`waitForURL`, `toHaveURL`, `waitForSelector`, bare `waitForTimeout`). Reaching a page is not an outcome.
 2. **Absence-of-error only** — asserts no error text or status < 500. Proves "didn't crash", not "worked".
 3. **Skipped or fixme** — `test.skip` / `test.fixme` / conditional skip. A skipped test covers nothing, whatever its title claims.
-4. **Asserting seed data the test didn't create** — verifies the fixture, not the behavior. The test never drove the action.
+4. **Observing instead of driving** — the test asserts state it never created: seeded rows, hardcoded startup content, or data left by an earlier test or run. Ask one question: did this test **drive** the behavior (perform the action under test, then assert on the result), or merely **observe** what was already on screen? Observing proves the fixture exists, not that the behavior works — if the action breaks for newly created data, this test stays green — and it fails for the wrong reason if the seed ever changes. Example — weak: load the board and expect the seeded "Welcome" post; strong: create a post, then assert exactly that post renders. This applies to read-only flows too: a list/view test that never creates (or uniquely identifies) its own data is observing.
 5. **Overly broad matchers** — `toHaveCount(0)`, `toBeVisible()` on generic containers, where a specific outcome should be pinned. Broad passes hide regressions.
 6. **Order / shared-state dependence** — depends on another test's data; breaks when run alone. The coverage exists but is fragile → partial.
 7. **No persistence re-check** — action asserted only in the immediate UI response; no reload/refetch confirms durability (relevant to the persistence dimension only).
